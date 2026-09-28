@@ -1,0 +1,36 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.inlagg-lista {
+  list-style: none;
+  padding: 0;
+}
+
+.inlagg {
+  border-bottom: 1px solid #ccc;
+  padding: 12px 0;
+}
+
+.inlagg__namn {
+  font-weight: bold;
+}
+
+.inlagg__tid {
+  color: #888;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.inlagg__text {
+  white-space: pre-wrap;
+}

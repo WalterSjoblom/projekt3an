@@ -1,6 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for
 import json
-import os
 from datetime import datetime
 
 app = Flask(__name__)
@@ -8,12 +7,10 @@ JSON_FILE = 'data.json'
 
 
 def load_posts():
-    if not os.path.exists(JSON_FILE):
-        return []
     try:
         with open(JSON_FILE, encoding='utf-8') as f:
             return json.load(f)
-    except Exception:
+    except (FileNotFoundError, json.JSONDecodeError):
         return []
 
 
@@ -24,9 +21,7 @@ def save_posts(posts):
 
 @app.route('/')
 def gastbok():
-    posts = load_posts()
-    posts_senaste_forst = list(reversed(posts))
-    return render_template('gastbok.html', posts=posts_senaste_forst)
+    return render_template('gastbok.html', posts=load_posts()[::-1])
 
 
 @app.route('/skicka', methods=['POST'])
@@ -47,4 +42,4 @@ def skicka():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True)
