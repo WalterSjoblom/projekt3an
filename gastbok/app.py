@@ -27,12 +27,14 @@ def gastbok():
 @app.route('/skicka', methods=['POST'])
 def skicka():
     namn = request.form.get('namn', '').strip()
+    email = request.form.get('email', '').strip()
     meddelande = request.form.get('meddelande', '').strip()
 
-    if namn and meddelande:
+    if namn and email and meddelande:
         posts = load_posts()
         posts.append({
             'namn': namn,
+            'email': email,
             'meddelande': meddelande,
             'tid': datetime.now().strftime('%Y-%m-%d %H:%M')
         })
