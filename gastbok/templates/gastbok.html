@@ -10,8 +10,9 @@
 
   <main>
     <h1>Gästbok</h1>
-    <p>Skriv något!</p>
+    <p>Skriv något</p>
 
+    <!-- Formulär för att skriva ett nytt inlägg -->
     <form method="post" action="{{ url_for('skicka') }}">
       <div class="form-group">
         <label for="namn">Namn</label>
@@ -33,6 +34,7 @@
 
     <h2>Inlägg ({{ posts|length }})</h2>
 
+     <!-- Lista med alla sparade inlägg, senaste överst -->
     {% if posts %}
       <ul class="inlagg-lista">
         {% for post in posts %}

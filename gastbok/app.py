@@ -6,6 +6,7 @@ app = Flask(__name__)
 JSON_FILE = 'data.json'
 
 
+# Hamtar alla sparade inlägg fran JSON-filen
 def load_posts():
     try:
         with open(JSON_FILE, encoding='utf-8') as f:
@@ -14,16 +15,19 @@ def load_posts():
         return []
 
 
+# Sparar hela listan med inlägg till JSON-filen
 def save_posts(posts):
     with open(JSON_FILE, 'w', encoding='utf-8') as f:
         json.dump(posts, f, indent=4, ensure_ascii=False)
 
 
+# Visar formularet och alla inlägg, senaste överst
 @app.route('/')
 def gastbok():
     return render_template('gastbok.html', posts=load_posts()[::-1])
 
 
+# Tar emot formularet och sparar ett nytt inlägg
 @app.route('/skicka', methods=['POST'])
 def skicka():
     namn = request.form.get('namn', '').strip()
